@@ -1,6 +1,7 @@
 import sharp from "sharp";
 import path from "path";
 import {
+  ASSETS_DIR,
   BLANK_COLOR,
   BLANK_PADDING,
   BLANK_SIZE_X,
@@ -10,7 +11,7 @@ import {
   LEFT_EDGE,
   RIGHT_EDGE,
   TOP_EDGE,
-} from "../const";
+} from '../const';
 import { processText } from "./processText";
 import { RequestData } from "../types";
 import { capitalizeFirstLetter } from "./lib";
@@ -54,7 +55,7 @@ export async function createRequestBlank(props: RequestData) {
       : Number(to.meta.width);
 
   // create a blank and compose it with text lines
-  const armsBuffer = await sharp(path.resolve("./assets/images/arms.png"))
+  const armsBuffer = await sharp(path.resolve(ASSETS_DIR, "images/arms.png"))
     .resize(2e3, 2e3)
     .toBuffer();
 

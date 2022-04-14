@@ -1,24 +1,25 @@
 import sharp, { OverlayOptions } from "sharp";
 import path from "path";
 import {
+  ASSETS_DIR,
   FONT_TYPE_BOLD,
   FONT_TYPE_MEDIUM,
   FONT_TYPE_SEMIBOLD,
   TEXT_COLOR,
-} from "../const";
+} from '../const';
 import { GenerationOptions } from "text-to-svg";
 import { FontFamilyType } from "../types";
 const TextToSVG = require("text-to-svg");
 
 export const TTSVG = {
   [FONT_TYPE_MEDIUM]: TextToSVG.loadSync(
-    path.resolve("./assets/fonts/OpenSans-Medium.ttf")
+    path.resolve(ASSETS_DIR, "fonts/OpenSans-Medium.ttf")
   ),
   [FONT_TYPE_SEMIBOLD]: TextToSVG.loadSync(
-    path.resolve("./assets/fonts/OpenSans-SemiBold.ttf")
+    path.resolve(ASSETS_DIR, "fonts/OpenSans-SemiBold.ttf")
   ),
   [FONT_TYPE_BOLD]: TextToSVG.loadSync(
-    path.resolve("./assets/fonts/OpenSans-Bold.ttf")
+    path.resolve(ASSETS_DIR, "fonts/OpenSans-Bold.ttf")
   ),
 };
 
@@ -97,8 +98,6 @@ export const processText = async (
     const lines = processMultilineString(text, oneLineTextWidth, maxWidth);
     const lineHeight = Number(meta.height);
     const nLines = lines.length;
-
-    console.log(nLines, JSON.stringify(lines));
 
     if (!lines) throw new Error("Could not split text for multiple lines");
 

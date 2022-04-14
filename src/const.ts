@@ -1,3 +1,6 @@
+import path from 'path';
+import { dirname } from 'path';
+
 export const BLANK_SIZE_Y = 3508;
 export const BLANK_SIZE_X = 2480;
 export const BLANK_PADDING = 100;
@@ -13,3 +16,6 @@ export const TEXT_COLOR = "#191b23";
 export const FONT_TYPE_MEDIUM = "medium";
 export const FONT_TYPE_SEMIBOLD = "semibold";
 export const FONT_TYPE_BOLD = "bold";
+
+export const ROOT_DIR = path.resolve(__filename, '..');
+export const ASSETS_DIR = path.resolve(ROOT_DIR, 'assets');
