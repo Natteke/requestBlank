@@ -1,5 +1,6 @@
 const path = require("path");
 const nodeExternals = require("webpack-node-externals");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   entry: "./src/index.ts",
@@ -23,4 +24,11 @@ module.exports = {
     libraryTarget: "commonjs",
     umdNamedDefine: true,
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [
+        'assets',
+      ],
+    }),
+  ],
 };
