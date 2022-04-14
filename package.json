@@ -14,6 +14,7 @@
     "text-to-svg": "^3.1.5"
   },
   "files": [
+    "dist/assets/**",
     "dist/bundle.js"
   ],
   "devDependencies": {
