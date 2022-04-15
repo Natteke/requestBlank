@@ -1,5 +1,4 @@
 import path from 'path';
-import { dirname } from 'path';
 
 export const BLANK_SIZE_Y = 3508;
 export const BLANK_SIZE_X = 2480;
@@ -19,9 +18,3 @@ export const FONT_TYPE_BOLD = "bold";
 
 export const ROOT_DIR = path.resolve(__filename, '..');
 export const ASSETS_DIR = path.resolve(ROOT_DIR, 'assets');
-
-'-------- request blank dir logs ---------'
-console.log('__dirname', __dirname);
-console.log('__filename', __filename);
-console.log('ROOT_DIR', ROOT_DIR);
-console.log('ASSETS_DIR', ASSETS_DIR);
