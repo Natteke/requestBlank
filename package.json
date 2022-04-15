@@ -14,8 +14,7 @@
     "text-to-svg": "^3.1.5"
   },
   "files": [
-    "dist/assets/**",
-    "dist/bundle.js"
+    "dist/"
   ],
   "devDependencies": {
     "@babel/cli": "^7.17.6",
