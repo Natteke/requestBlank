@@ -2,10 +2,10 @@ const { createRequestBlank } = require("./dist/bundle.js");
 
 (async () => {
   const file = await createRequestBlank({
-    from: "Владислав",
-    to: "Роман",
-    type: "Заявление",
-    clarification: "Я вот такой ско",
+    from: "test",
+    to: "test",
+    type: "test",
+    clarification: "test",
     date: new Date(),
   });
 
