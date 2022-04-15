@@ -9,5 +9,5 @@ const { createRequestBlank } = require("./dist/bundle.js");
     date: new Date(),
   });
 
-  file.toFile("./testblank.png");
+  file.toFile("./testblank.jpeg");
 })();
