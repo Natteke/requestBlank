@@ -24,6 +24,8 @@ const TOP_POSITIONS = {
   date: BOTTOM_EDGE,
 };
 
+const MAIN_STAMP_SIZEXY = 950;
+
 export async function createRequestBlank(props: RequestData) {
   const formattedDate = capitalizeFirstLetter(
     new Intl.DateTimeFormat("ru-RU", {
@@ -59,6 +61,9 @@ export async function createRequestBlank(props: RequestData) {
     .resize(2e3, 2e3)
     .toBuffer();
 
+  const stampBuffer = await sharp(path.resolve(ASSETS_DIR, "images/main_stamp.png"))
+    .toBuffer();
+
   return await sharp({
     create: {
       width: BLANK_SIZE_X,
@@ -69,6 +74,11 @@ export async function createRequestBlank(props: RequestData) {
   }).composite([
     {
       input: armsBuffer,
+    },
+    {
+      input: stampBuffer,
+      top: BOTTOM_EDGE - MAIN_STAMP_SIZEXY - 50,
+      left: RIGHT_EDGE - MAIN_STAMP_SIZEXY - 50
     },
     {
       input: from.buffer,
