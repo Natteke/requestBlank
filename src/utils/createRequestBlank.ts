@@ -49,7 +49,7 @@ export async function createRequestBlank(props: RequestData) {
         maxWidth: BLANK_SIZE_X - BLANK_PADDING * 2,
       },
     }),
-    processText(props.withRespect),
+    processText(props.withRespect || ' '),
     processText(formattedDate),
   ]);
 
