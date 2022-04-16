@@ -112,7 +112,7 @@ export const processText = async (
     image = sharp({
       create: {
         height: lineHeight * nLines,
-        width: maxWidth + 50, // 50 - погрешность в рассчете длинны строки. Видимо что-то не так после конвертации из svg.
+        width: maxWidth + 100, // 100 - погрешность в рассчете длинны строки. Видимо что-то не так после конвертации из svg.
         channels: 4,
         background: { r: 255, g: 255, b: 255, alpha: 0 },
       },
