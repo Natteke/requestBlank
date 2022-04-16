@@ -7,6 +7,7 @@ const { createRequestBlank } = require("./dist/bundle.js");
     type: "test",
     clarification: "test",
     date: new Date(),
+    withRespect: 'С Уважением Андрей викторович'
   });
 
   file.toFile("./testblank.jpeg");

@@ -21,6 +21,7 @@ const TOP_POSITIONS = {
   to: TOP_EDGE + 100,
   type: TOP_EDGE + 800,
   clarification: TOP_EDGE + 1000,
+  withRespect: BOTTOM_EDGE - 100,
   date: BOTTOM_EDGE,
 };
 
@@ -34,7 +35,7 @@ export async function createRequestBlank(props: RequestData) {
   );
 
   // process all text lines
-  const [from, to, type, clarification, date] = await Promise.all([
+  const [from, to, type, clarification, withRespect, date] = await Promise.all([
     processText(`От ${props.from}`),
     processText(`Для ${props.to}`),
     processText(capitalizeFirstLetter(props.type), {
@@ -48,6 +49,7 @@ export async function createRequestBlank(props: RequestData) {
         maxWidth: BLANK_SIZE_X - BLANK_PADDING * 2,
       },
     }),
+    processText(props.withRespect),
     processText(formattedDate),
   ]);
 
@@ -63,6 +65,7 @@ export async function createRequestBlank(props: RequestData) {
 
   const stampBuffer = await sharp(path.resolve(ASSETS_DIR, "images/main_stamp.png"))
     .toBuffer();
+
 
   return await sharp({
     create: {
@@ -101,9 +104,15 @@ export async function createRequestBlank(props: RequestData) {
       left: LEFT_EDGE,
     },
     {
+      input: withRespect.buffer,
+      top: Math.floor(TOP_POSITIONS.withRespect - Number(withRespect.meta.height)),
+      left: LEFT_EDGE,
+    },
+    {
       input: date.buffer,
       top: Math.floor(TOP_POSITIONS.date - Number(date.meta.height)),
       left: LEFT_EDGE,
     },
+
   ]);
 }

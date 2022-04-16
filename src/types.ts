@@ -5,6 +5,7 @@ export type RequestData = {
   to: string;
   type: string;
   clarification: string;
+  withRespect: string;
   date: Date;
 };
 
