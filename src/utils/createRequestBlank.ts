@@ -37,7 +37,7 @@ export async function createRequestBlank(props: RequestData) {
   // process all text lines
   const [from, to, type, clarification, withRespect, date] = await Promise.all([
     processText(`От ${props.from}`),
-    processText(`Для ${props.to}`),
+    processText(`Кому ${props.to}`),
     processText(capitalizeFirstLetter(props.type), {
       fontFamily: FONT_TYPE_BOLD,
       svgOptions: {
