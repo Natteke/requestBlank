@@ -28,6 +28,9 @@ const TOP_POSITIONS = {
 const MAIN_STAMP_SIZEXY = 950;
 
 export async function createRequestBlank(props: RequestData) {
+  const {
+    blankType = 'default',
+  } = props;
   const formattedDate = capitalizeFirstLetter(
     new Intl.DateTimeFormat("ru-RU", {
       dateStyle: "full",
@@ -36,8 +39,8 @@ export async function createRequestBlank(props: RequestData) {
 
   // process all text lines
   const [from, to, type, clarification, withRespect, date] = await Promise.all([
-    processText(`От ${props.from}`),
-    processText(`Кому ${props.to}`),
+    processText(`${props.from}`),
+    processText(`${props.to}`),
     processText(capitalizeFirstLetter(props.type), {
       fontFamily: FONT_TYPE_BOLD,
       svgOptions: {
@@ -59,7 +62,7 @@ export async function createRequestBlank(props: RequestData) {
       : Number(to.meta.width);
 
   // create a blank and compose it with text lines
-  const armsBuffer = await sharp(path.resolve(ASSETS_DIR, "images/arms.png"))
+  const bgImageBuffer = await sharp(path.resolve(ASSETS_DIR, `images/${blankType}.png`))
     .resize(2e3, 2e3)
     .toBuffer();
 
@@ -76,7 +79,7 @@ export async function createRequestBlank(props: RequestData) {
     },
   }).composite([
     {
-      input: armsBuffer,
+      input: bgImageBuffer,
     },
     {
       input: stampBuffer,

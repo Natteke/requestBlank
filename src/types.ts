@@ -7,6 +7,7 @@ export type RequestData = {
   clarification: string;
   withRespect: string;
   date: Date;
+  blankType?: 'default' | 'dota';
 };
 
 export type FontFamilyType = keyof typeof TTSVG;
