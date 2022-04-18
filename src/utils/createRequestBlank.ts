@@ -1,5 +1,5 @@
-import sharp from "sharp";
-import path from "path";
+import sharp from 'sharp'
+import path from 'path'
 import {
   ASSETS_DIR,
   BLANK_COLOR,
@@ -11,10 +11,10 @@ import {
   LEFT_EDGE,
   RIGHT_EDGE,
   TOP_EDGE,
-} from '../const';
-import { processText } from "./processText";
-import { RequestData } from "../types";
-import { capitalizeFirstLetter } from "./lib";
+} from '../const'
+import { processText } from './processText'
+import { RequestData } from '../types'
+import { capitalizeFirstLetter } from './lib'
 
 const TOP_POSITIONS = {
   from: TOP_EDGE,
@@ -23,24 +23,22 @@ const TOP_POSITIONS = {
   clarification: TOP_EDGE + 1000,
   withRespect: BOTTOM_EDGE - 100,
   date: BOTTOM_EDGE,
-};
+}
 
-const MAIN_STAMP_SIZEXY = 950;
+const MAIN_STAMP_SIZEXY = 950
 
 export async function createRequestBlank(props: RequestData) {
-  const {
-    blankType = 'default',
-  } = props;
+  const { blankType = 'default' } = props
   const formattedDate = capitalizeFirstLetter(
-    new Intl.DateTimeFormat("ru-RU", {
-      dateStyle: "full",
+    new Intl.DateTimeFormat('ru-RU', {
+      dateStyle: 'full',
     }).format(props.date)
-  );
+  )
 
   // process all text lines
   const [from, to, type, clarification, withRespect, date] = await Promise.all([
-    processText(`${props.from}`),
-    processText(`${props.to}`),
+    processText(props.from),
+    processText(props.to),
     processText(capitalizeFirstLetter(props.type), {
       fontFamily: FONT_TYPE_BOLD,
       svgOptions: {
@@ -54,21 +52,23 @@ export async function createRequestBlank(props: RequestData) {
     }),
     processText(props.withRespect || ' '),
     processText(formattedDate),
-  ]);
+  ])
 
   const titleTextLeft =
     Number(from.meta.width) > Number(to.meta.width)
       ? Number(from.meta.width)
-      : Number(to.meta.width);
+      : Number(to.meta.width)
 
   // create a blank and compose it with text lines
-  const bgImageBuffer = await sharp(path.resolve(ASSETS_DIR, `images/${blankType}.png`))
+  const bgImageBuffer = await sharp(
+    path.resolve(ASSETS_DIR, `images/${blankType}.png`)
+  )
     .resize(2e3, 2e3)
-    .toBuffer();
+    .toBuffer()
 
-  const stampBuffer = await sharp(path.resolve(ASSETS_DIR, "images/main_stamp.png"))
-    .toBuffer();
-
+  const stampBuffer = await sharp(
+    path.resolve(ASSETS_DIR, 'images/main_stamp.png')
+  ).toBuffer()
 
   return await sharp({
     create: {
@@ -84,7 +84,7 @@ export async function createRequestBlank(props: RequestData) {
     {
       input: stampBuffer,
       top: BOTTOM_EDGE - MAIN_STAMP_SIZEXY - 50,
-      left: RIGHT_EDGE - MAIN_STAMP_SIZEXY - 50
+      left: RIGHT_EDGE - MAIN_STAMP_SIZEXY - 50,
     },
     {
       input: from.buffer,
@@ -108,7 +108,9 @@ export async function createRequestBlank(props: RequestData) {
     },
     {
       input: withRespect.buffer,
-      top: Math.floor(TOP_POSITIONS.withRespect - Number(withRespect.meta.height)),
+      top: Math.floor(
+        TOP_POSITIONS.withRespect - Number(withRespect.meta.height)
+      ),
       left: LEFT_EDGE,
     },
     {
@@ -116,6 +118,5 @@ export async function createRequestBlank(props: RequestData) {
       top: Math.floor(TOP_POSITIONS.date - Number(date.meta.height)),
       left: LEFT_EDGE,
     },
-
-  ]);
+  ])
 }
