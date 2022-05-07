@@ -16,6 +16,10 @@
   "files": [
     "dist/**"
   ],
+  "exports": {
+    ".": "./dist/bundle.js",
+    "./types": "./types.js"
+  },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
     "@babel/core": "^7.17.9",
