@@ -70,6 +70,15 @@ export async function createRequestBlank(props: RequestData) {
     path.resolve(ASSETS_DIR, 'images/main_stamp.png')
   ).toBuffer()
 
+  const background = await sharp(
+    path.resolve(ASSETS_DIR, 'images/blank-starter.jpg')
+  )
+    .resize({
+      width: BLANK_SIZE_X,
+      height: BLANK_SIZE_Y,
+    })
+    .toBuffer()
+
   return await sharp({
     create: {
       width: BLANK_SIZE_X,
@@ -78,6 +87,11 @@ export async function createRequestBlank(props: RequestData) {
       background: BLANK_COLOR,
     },
   }).composite([
+    {
+      input: background,
+      top: 0,
+      left: 0,
+    },
     {
       input: bgImageBuffer,
     },
