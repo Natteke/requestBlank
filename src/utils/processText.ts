@@ -92,7 +92,7 @@ const processMultilineString = (
 }
 
 export const processText = async (
-  text: string = '',
+  text: string = ' ', // need empty line to work
   options: Options = {}
 ): Promise<ProcessResponse> => {
   const {

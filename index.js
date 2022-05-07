@@ -59,6 +59,7 @@ const fs = require('fs')
       date: new Date(),
       blankType: 'dota',
     }),
+    createRequestBlank({}),
   ])
 
   res.forEach((file, i) => {

@@ -6,8 +6,7 @@
   "scripts": {
     "build:dev": "yarn webpack --mode development",
     "build": "yarn webpack --mode production",
-    "run:dev": "yarn build:dev && node ./index.js",
-    "run": "yarn build && node ./index.js"
+    "r": "yarn build:dev && node ./index.js"
   },
   "dependencies": {
     "sharp": "^0.30.3",
